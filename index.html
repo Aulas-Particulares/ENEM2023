@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Armazenar Nomes</title>
+    <script type="module">
+        // Importar as funções necessárias dos SDKs do Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+        // Configurações do seu app Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyA2qPRB9lV9dCJkZrU_bgEpUc5NiJzwJQM",
+            authDomain: "lista-de-nomes-teste.firebaseapp.com",
+            projectId: "lista-de-nomes-teste",
+            storageBucket: "lista-de-nomes-teste.appspot.com",
+            messagingSenderId: "873428237211",
+            appId: "1:873428237211:web:267fc19d043af1e37abf3e"
+        };
+
+        // Inicializar o app Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase();
+
+        function armazenarNome() {
+            var nome = document.getElementById("nome").value;
+            var nomesRef = ref(database, 'nomes');
+            push(nomesRef, nome);
+
+            // Limpa a caixa de texto
+            document.getElementById("nome").value = "";
+        }
+    </script>
+</head>
+<body>
+    <h1>Armazenar Nomes</h1>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+    <button onclick="armazenarNome()">Adicionar</button>
+
+    <ul id="listaNomes">
+    </ul>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js"></script>
+</body>
+</html>
